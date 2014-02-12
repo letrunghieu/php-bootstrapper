@@ -229,6 +229,23 @@ class Component
 	}
 	return $div->html();
     }
+    
+    public static function buttonDropdownToggle($content, $options = array())
+    {
+	if (!isset($options['attrs']))
+	    $options['attrs']  = array();
+	if (!isset($options['attrs']['class']))
+	    $options['attrs']['class'] = "";
+	$options['attrs']['class'] .= ' dropdown-toggle';
+	$options['attrs']['data-toggle'] = 'dropdown';
+	return static::button($content, $options);
+    }
+    
+    public static function caret()
+    {
+	$span =new Element('span');
+	return $span->addClass('caret')->html();
+    }
 
 }
 

@@ -245,6 +245,26 @@ HTML;
 	
 	$this->assertSame($html, Component::dropdown($items, array('role' => 'menu')));
     }
+    
+    public function testCaret()
+    {
+	$html = <<<HTML
+<span class="caret"></span>
+
+HTML;
+	$this->assertSame($html, Component::caret());
+    }
+    
+    public function testButtonDropdownToggle()
+    {
+	$html = <<<HTML
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+  Dropdown
+</button>
+
+HTML;
+	$this->assertSame($html, Component::buttonDropdownToggle('Dropdown'));
+    }
 
 }
 
