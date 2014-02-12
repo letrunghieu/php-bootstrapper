@@ -92,7 +92,7 @@ HTML;
 
 HTML;
 	$this->assertSame($html, Component::button('Default'));
-	
+
 	$html = <<<HTML
 <a class="btn btn-default">
   Default
@@ -100,9 +100,9 @@ HTML;
 
 HTML;
 	$this->assertSame($html, Component::button('Default', array(
-	    'element' => 'a'
+		    'element' => 'a'
 	)));
-	
+
 	$html = <<<HTML
 <button type="button" class="btn btn-success btn-lg">
   Default
@@ -110,10 +110,10 @@ HTML;
 
 HTML;
 	$this->assertSame($html, Component::button('Default', array(
-	    'type' => Component::CLASS_SUCCESS,
-	    'size' => Component::CLASS_SIZE_LARGE,
+		    'type' => Component::CLASS_SUCCESS,
+		    'size' => Component::CLASS_SIZE_LARGE,
 	)));
-	
+
 	$html = <<<HTML
 <button type="button" class="btn btn-success btn-lg" data-foo="bar" data-bar>
   Default
@@ -121,13 +121,40 @@ HTML;
 
 HTML;
 	$this->assertSame($html, Component::button('Default', array(
-	    'type' => Component::CLASS_SUCCESS,
-	    'size' => Component::CLASS_SIZE_LARGE,
-	    'attrs' => array(
-		'data-foo' => 'bar',
-		'data-bar' => true,
-	    )
+		    'type' => Component::CLASS_SUCCESS,
+		    'size' => Component::CLASS_SIZE_LARGE,
+		    'attrs' => array(
+			'data-foo' => 'bar',
+			'data-bar' => true,
+		    )
 	)));
+    }
+
+    public function testButtonGroup()
+    {
+	$html = <<<HTML
+<div class="btn-group">
+  <button type="button" class="btn btn-default">
+  Left
+</button>
+
+  <button type="button" class="btn btn-default">
+  Middle
+</button>
+
+  <button type="button" class="btn btn-default">
+  Right
+</button>
+
+</div>
+
+HTML;
+	$buttons = array(
+	    Component::button('Left'),
+	    Component::button('Middle'),
+	    Component::button('Right'),
+	);
+	$this->assertSame($html, Component::buttonGroup($buttons));
     }
 
 }

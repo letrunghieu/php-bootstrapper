@@ -132,6 +132,42 @@ class Component
 	return $element->html();
     }
 
+    /**
+     * 
+     * @param array $buttons	array of inner buttons
+     * @param array $options	allowed options
+     * <ul>
+     * 	<li><code>attrs</code>: array of attributes</li>
+     * 	<li><code>size</code>: the size of button</li>
+     * </ul>
+     */
+    public static function buttonGroup($buttons, $options = array())
+    {
+	$default = array(
+	    'attrs' => array(),
+	    'size' => '',
+	);
+	$options = Utilities::mergeParams($default, $options);
+	$div = new Element('div');
+	$div->addClass('btn-group');
+	if ($options['size'])
+	    $div->addClass("btn-group-{$options['size']}");
+	if (isset($options['attrs']['class']))
+	{
+	    $div->addClass($options['attrs']['class']);
+	    unset($options['attrs']['class']);
+	}
+	foreach ($options['attrs'] as $attr => $val)
+	{
+	    $div->setAttr($attr, $val);
+	}
+	foreach ($buttons as $btn)
+	{
+	    $div->appendText($btn);
+	}
+	return $div->html();
+    }
+
 }
 
 ?>
