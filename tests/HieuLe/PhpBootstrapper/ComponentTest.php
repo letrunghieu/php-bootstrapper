@@ -157,6 +157,36 @@ HTML;
 	$this->assertSame($html, Component::buttonGroup($buttons));
     }
 
+    public function testButtonToolbar()
+    {
+	$html = <<<HTML
+<div class="btn-toolbar" role="toolbar">
+  <div class="btn-group">
+  <button type="button" class="btn btn-default">
+  Left
+</button>
+
+  <button type="button" class="btn btn-default">
+  Middle
+</button>
+
+  <button type="button" class="btn btn-default">
+  Right
+</button>
+
+</div>
+
+</div>
+
+HTML;
+	$buttons = array(
+	    Component::button('Left'),
+	    Component::button('Middle'),
+	    Component::button('Right'),
+	);
+	$this->assertSame($html, Component::buttonToolbar(Component::buttonGroup($buttons)));
+    }
+
 }
 
 ?>

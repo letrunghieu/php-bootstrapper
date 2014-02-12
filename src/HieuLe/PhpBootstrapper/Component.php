@@ -168,6 +168,22 @@ class Component
 	return $div->html();
     }
 
+    public static function buttonToolbar($buttonGroup, $attrs = array())
+    {
+	$div = new Element('div');
+	$div->addClass('btn-toolbar')->appendText($buttonGroup)->setAttr('role', 'toolbar');
+	if (isset($attrs['class']))
+	{
+	    $div->addClass($attrs['class']);
+	    unset($attrs['class']);
+	}
+	foreach ($attrs as $attr => $val)
+	{
+	    $div->setAttr($attr, $val);
+	}
+	return $div->html();
+    }
+
 }
 
 ?>
