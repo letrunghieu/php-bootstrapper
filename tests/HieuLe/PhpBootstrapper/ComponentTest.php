@@ -30,6 +30,17 @@ HTML;
 HTML;
 	$this->assertSame($html, Component::alert("<strong>Warning!</strong> Better check yourself, you're not looking too good.", Component::CLASS_WARNING));
     }
+    
+    public function testBadge()
+    {
+	$html = <<<HTML
+<span class="badge">
+  42
+</span>
+
+HTML;
+	$this->assertSame($html, Component::badge(42));
+    }
 }
 
 ?>

@@ -36,6 +36,13 @@ class Component
 	$div->appendText($content);
 	return $div->html();
     }
+    
+    public static function badge($content)
+    {
+	$span = new Element('span');
+	$span->addClass('badge')->appendText($content);
+	return $span->html();
+    }
 
 }
 
