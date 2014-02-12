@@ -41,6 +41,46 @@ HTML;
 HTML;
 	$this->assertSame($html, Component::badge(42));
     }
+    
+    public function testBreadcrumb()
+    {
+	$html = <<<HTML
+<ol class="breadcrumb"></ol>
+
+HTML;
+	$this->assertSame($html, Component::breadcrumb(array()));
+	
+	$html = <<<HTML
+<ol class="breadcrumb">
+  <li>
+    <a href="#">
+      Home
+    </a>
+  </li>
+  <li>
+    <a href="#">
+      Library
+    </a>
+  </li>
+  <li class="active">
+    Data
+  </li>
+</ol>
+
+HTML;
+	$data  =array(
+	    array(
+		'link' => '#',
+		'text' => 'Home'
+	    ),
+	    array(
+		'link' => '#',
+		'text' => 'Library'
+	    ),
+	    'Data'
+	);
+	$this->assertSame($html, Component::breadcrumb($data));
+    }
 }
 
 ?>
