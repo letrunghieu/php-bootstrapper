@@ -18,9 +18,9 @@ class Utilities
 	return htmlentities($input, ENT_NOQUOTES | ENT_HTML5, 'UTF-8', false);
     }
     
-    public static function mergeParams(array $default, array $option)
+    public static function mergeParams(array $default, array $options)
     {
-	return array_merge($default, $option);
+	return array_merge($default, $options);
     }
 }
 
