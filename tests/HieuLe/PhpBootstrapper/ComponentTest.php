@@ -187,6 +187,65 @@ HTML;
 	$this->assertSame($html, Component::buttonToolbar(Component::buttonGroup($buttons)));
     }
 
+    public function testDropdown()
+    {
+	$html = <<<HTML
+<ul class="dropdown-menu" role="menu">
+  <li class="dropdown-header">
+    Dropdown header
+  </li>
+  <li>
+    <a href="#">
+      Action
+    </a>
+  </li>
+  <li class="disable">
+    <a href="#">Another action</a>
+  </li>
+  <li class="disable">
+    <a href="#">
+      Third action
+    </a>
+  </li>
+  <li class="divider"></li>
+  <li class="dropdown-header">
+    Dropdown header
+  </li>
+  <li>
+    <a href="#">Another action</a>
+  </li>
+</ul>
+
+HTML;
+	$items = array(
+	    array(
+		'header' => 'Dropdown header'
+	    ),
+	    array(
+		'link' => '#',
+		'text' => 'Action'
+	    ),
+	    array(
+		'disable' => true,
+		'text' => '<a href="#">Another action</a>'
+	    ),
+	    array(
+		'disable' => true,
+		'link' => '#',
+		'text' => 'Third action'
+	    ),
+	    array(
+		'divider' => true,
+	    ),
+	    array(
+		'header' => 'Dropdown header'
+	    ),
+	    '<a href="#">Another action</a>'
+	);
+	
+	$this->assertSame($html, Component::dropdown($items, array('role' => 'menu')));
+    }
+
 }
 
 ?>

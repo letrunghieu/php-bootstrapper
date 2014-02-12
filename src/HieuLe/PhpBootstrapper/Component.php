@@ -184,6 +184,52 @@ class Component
 	return $div->html();
     }
 
+    public static function dropdown($items, $attrs = array())
+    {
+	$div = new Element('ul');
+	$div->addClass('dropdown-menu');
+	if (isset($attrs['class']))
+	{
+	    $div->addClass($attrs['class']);
+	    unset($attrs['class']);
+	}
+	foreach ($attrs as $attr => $val)
+	{
+	    $div->setAttr($attr, $val);
+	}
+	foreach ($items as $item)
+	{
+	    $li = new Element('li');
+	    if (is_string($item))
+	    {
+		$li->appendText($item);
+	    } else if (is_array($item))
+	    {
+		if (isset($item['divider']) && $item['divider'])
+		{
+		    $li->addClass('divider');
+		} else if (isset($item['header']))
+		{
+		    $li->addClass('dropdown-header')->appendText($item['header']);
+		} else
+		{
+		    if (isset($item['link']))
+		    {
+			$link = new Element('a');
+			$link->setAttr('href', $item['link'])->appendText($item['text'])->appendTo($li);
+		    } else
+		    {
+			$li->appendText($item['text']);
+		    }
+		    if (isset($item['disable']) && $item['disable'])
+			$li->addClass('disable');
+		}
+	    }
+	    $li->appendTo($div);
+	}
+	return $div->html();
+    }
+
 }
 
 ?>
