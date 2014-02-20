@@ -32,6 +32,9 @@ class Component
     const CLASS_SIZE_XSMALL = 'xs';
     const CLASS_SIZE_SMALL = 'sm';
     const CLASS_SIZE_LARGE = 'lg';
+    const CLASS_DROPUP = 'dropup';
+    const CLASS_BTN_GROUP_VERT = 'btn-group-vertical';
+    const CLASS_BTN_GROUP_JUSTIFY = 'btn-group-justified';
 
     public static function alert($content, $mode, $dismisable = false)
     {
@@ -229,22 +232,45 @@ class Component
 	}
 	return $div->html();
     }
-    
+
     public static function buttonDropdownToggle($content, $options = array())
     {
 	if (!isset($options['attrs']))
-	    $options['attrs']  = array();
+	    $options['attrs'] = array();
 	if (!isset($options['attrs']['class']))
 	    $options['attrs']['class'] = "";
 	$options['attrs']['class'] .= ' dropdown-toggle';
 	$options['attrs']['data-toggle'] = 'dropdown';
 	return static::button($content, $options);
     }
-    
+
     public static function caret()
     {
-	$span =new Element('span');
+	$span = new Element('span');
 	return $span->addClass('caret')->html();
+    }
+
+    public static function nav($items, $attrs = array())
+    {
+	$div = new Element('ul');
+	$div->addClass('nav');
+	if (isset($attrs['class']))
+	{
+	    $div->addClass($attrs['class']);
+	    unset($attrs['class']);
+	}
+	foreach ($attrs as $attr => $val)
+	{
+	    $div->setAttr($attr, $val);
+	}
+	foreach ($items as $item)
+	{
+	    $li = new Element('li');
+	    $link = new Element('a');
+	    $link->setAttr('href', $item['link'])->appendText($item['text'])->appendTo($li);
+	    $li->appendTo($div);
+	}
+	return $div->html();
     }
 
 }
