@@ -1,12 +1,6 @@
 {
     "name": "hieu-le/php-bootstrapper",
-    "description": "",
-    "repositories": [
-	{
-	    "url": "https://github.com/letrunghieu/php-html-dom.git",
-	    "type": "git"
-	}
-    ],
+    "description": "The PHP wrapper for generating bootstrap UI framework stuffs",
     "authors": [
 	{
 	    "name": "Hieu Le",
