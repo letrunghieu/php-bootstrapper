@@ -1,6 +1,8 @@
 {
     "name": "hieu-le/php-bootstrapper",
     "description": "The PHP wrapper for generating bootstrap UI framework stuffs",
+    "keywords": ["bootstrap", "laravel", "php", "wrapper"],
+    "license": "MIT",
     "authors": [
 	{
 	    "name": "Hieu Le",
