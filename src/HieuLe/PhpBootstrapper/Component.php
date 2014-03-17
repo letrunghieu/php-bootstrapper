@@ -12,29 +12,24 @@ use HieuLe\PhpHtmlDom\Node\Element;
  */
 class Component
 {
-
-    const CLASS_SUCCESS = 'success';
-    const CLASS_INFO = 'info';
-    const CLASS_WARNING = 'warning';
-    const CLASS_DANGER = 'danger';
-    const CLASS_ACTIVE = 'active';
-
-    // button classes
-    const CLASS_BTN_INFO = 'info';
-    const CLASS_BTN_DEFAULT = 'default';
-    const CLASS_BTN_PRIMARY = 'primary';
-    const CLASS_BTN_SUCCESS = 'success';
-    const CLASS_BTN_WARNING = 'warning';
-    const CLASS_BTN_DANGER = 'danger';
-    const CLASS_BTN_LINK = 'link';
-
     // sizes
+
     const CLASS_SIZE_XSMALL = 'xs';
     const CLASS_SIZE_SMALL = 'sm';
     const CLASS_SIZE_LARGE = 'lg';
     const CLASS_DROPUP = 'dropup';
     const CLASS_BTN_GROUP_VERT = 'btn-group-vertical';
     const CLASS_BTN_GROUP_JUSTIFY = 'btn-group-justified';
+
+    // modifier classes
+    const MODIFIER_ACTIVE = 'active';
+    const MODIFIER_DANGER = 'danger';
+    const MODIFIER_DEFAULT = 'default';
+    const MODIFIER_INFO = 'info';
+    const MODIFIER_LINK = 'link';
+    const MODIFIER_PRIMARY = 'primary';
+    const MODIFIER_SUCCESS = 'success';
+    const MODIFIER_WARNING = 'warning';
 
     public static function alert($content, $mode, $dismisable = false)
     {
@@ -83,7 +78,7 @@ class Component
 	{
 	    $li = new Element('li');
 	    if ($useActive && $i == $lastIdx)
-		$li->addClass(static::CLASS_ACTIVE);
+		$li->addClass(static::MODIFIER_ACTIVE);
 	    if (is_array($d))
 	    {
 		$link = new Element('a');
@@ -114,7 +109,7 @@ class Component
 	    'element' => 'button',
 	    'attrs' => array(),
 	    'size' => '',
-	    'type' => static::CLASS_BTN_DEFAULT
+	    'type' => static::MODIFIER_DEFAULT
 	);
 	$options = Utilities::mergeParams($default, $options);
 	$element = new Element($options['element']);

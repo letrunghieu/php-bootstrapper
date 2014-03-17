@@ -21,7 +21,7 @@ class ComponentTest extends PHPUnit_Framework_TestCase
 </div>
 
 HTML;
-	$this->assertSame($html, Component::alert("<strong>Warning!</strong> Better check yourself, you're not looking too good.", Component::CLASS_WARNING, "Đóng"));
+	$this->assertSame($html, Component::alert("<strong>Warning!</strong> Better check yourself, you're not looking too good.", Component::MODIFIER_WARNING, "Đóng"));
 
 	$html = <<<HTML
 <div class="alert alert-warning">
@@ -29,7 +29,7 @@ HTML;
 </div>
 
 HTML;
-	$this->assertSame($html, Component::alert("<strong>Warning!</strong> Better check yourself, you're not looking too good.", Component::CLASS_WARNING));
+	$this->assertSame($html, Component::alert("<strong>Warning!</strong> Better check yourself, you're not looking too good.", Component::MODIFIER_WARNING));
     }
 
     public function testBadge()
@@ -110,7 +110,7 @@ HTML;
 
 HTML;
 	$this->assertSame($html, Component::button('Default', array(
-		    'type' => Component::CLASS_SUCCESS,
+		    'type' => Component::MODIFIER_SUCCESS,
 		    'size' => Component::CLASS_SIZE_LARGE,
 	)));
 
@@ -121,7 +121,7 @@ HTML;
 
 HTML;
 	$this->assertSame($html, Component::button('Default', array(
-		    'type' => Component::CLASS_SUCCESS,
+		    'type' => Component::MODIFIER_SUCCESS,
 		    'size' => Component::CLASS_SIZE_LARGE,
 		    'attrs' => array(
 			'data-foo' => 'bar',
