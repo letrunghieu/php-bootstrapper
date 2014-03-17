@@ -242,10 +242,10 @@ HTML;
 	    ),
 	    '<a href="#">Another action</a>'
 	);
-	
+
 	$this->assertSame($html, Component::dropdown($items, array('role' => 'menu')));
     }
-    
+
     public function testCaret()
     {
 	$html = <<<HTML
@@ -254,7 +254,7 @@ HTML;
 HTML;
 	$this->assertSame($html, Component::caret());
     }
-    
+
     public function testButtonDropdownToggle()
     {
 	$html = <<<HTML
@@ -265,7 +265,7 @@ HTML;
 HTML;
 	$this->assertSame($html, Component::buttonDropdownToggle('Dropdown'));
     }
-    
+
     public function testLabel()
     {
 	$html = <<<HTML
@@ -283,7 +283,7 @@ HTML;
 HTML;
 	$this->assertSame($html, Component::label('Foo', Component::MODIFIER_SUCCESS, array('class' => 'class-foo', 'data-bar' => 'baz')));
     }
-    
+
     public function testListGroupOpen()
     {
 	$html = <<<HTML
@@ -295,30 +295,49 @@ HTML;
 HTML;
 	$this->assertSame($html, Component::linkListGroupOpen(array('class' => 'foo', 'data-bar' => 'baz')));
     }
-    
+
     public function testListGroupClose()
     {
 	$this->assertSame("</ul>", Component::listGroupClose());
 	$this->assertSame("</div>", Component::linkListGroupClose());
     }
-    
+
     public function testListGroupItem()
     {
-	$html  = <<<HTML
+	$html = <<<HTML
 <li class="list-group-item">
   Foo
 </li>
 
 HTML;
 	$this->assertSame($html, Component::listGroupItem('Foo'));
-	
-	$html  = <<<HTML
+
+	$html = <<<HTML
 <a class="list-group-item list-group-item-warning foo" href="#">
   Foo
 </a>
 
 HTML;
 	$this->assertSame($html, Component::linkListGroupItem("Foo", array('class' => 'foo', 'href' => '#'), Component::MODIFIER_WARNING));
+    }
+
+    public function testProgress()
+    {
+	$html = <<<HTML
+<div class="progress">
+  <div class="progress-bar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+</div>
+
+HTML;
+	$this->assertSame($html, Component::progress(20));
+
+	$html = <<<HTML
+<div class="progress progress-striped active sm">
+  <div class="progress-bar progress-bar-danger foo" data-foo="bar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+</div>
+
+HTML;
+	$this->assertSame($html, Component::progress(array('value' => 20, 'modifier' => Component::MODIFIER_DANGER, 'attrs' => array('class' => 'foo', 'data-foo' => 'bar')), array('class' => 'sm'), true, true));
     }
 
 }

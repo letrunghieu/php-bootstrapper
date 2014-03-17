@@ -262,6 +262,36 @@ class Component
 	return $span->html();
     }
 
+    public static function listGroupOpen($attrs = array())
+    {
+	return static::_listGroupOpen('ul', $attrs);
+    }
+
+    public static function linkListGroupOpen($attrs = array())
+    {
+	return static::_listGroupOpen('div', $attrs);
+    }
+
+    public static function listGroupClose()
+    {
+	return static::_listGroupClose('ul');
+    }
+
+    public static function linkListGroupClose()
+    {
+	return static::_listGroupClose('div');
+    }
+
+    public static function listGroupItem($content, $attrs = array(), $modifier = '')
+    {
+	return static::_listGroupItem('li', $content, $attrs, $modifier);
+    }
+
+    public static function linkListGroupItem($content, $attrs = array(), $modifier = '')
+    {
+	return static::_listGroupItem('a', $content, $attrs, $modifier);
+    }
+
     public static function nav($items, $attrs = array())
     {
 	$div = new Element('ul');
@@ -285,34 +315,59 @@ class Component
 	return $div->html();
     }
 
-    public static function listGroupOpen($attrs = array())
+    public static function progress($bars, $attrs = array(), $isStripe = false, $isAnimated = false)
     {
-	return static::_listGroupOpen('ul', $attrs);
-    }
+	if (!is_array($bars))
+	    $bars = array('value' => $bars);
+	if (!isset($bars[0]))
+	    $bars = array($bars);
 
-    public static function linkListGroupOpen($attrs = array())
-    {
-	return static::_listGroupOpen('div', $attrs);
-    }
-    
-    public static function listGroupClose()
-    {
-	return static::_listGroupClose('ul');
-    }
-    
-    public static function linkListGroupClose()
-    {
-	return static::_listGroupClose('div');
-    }
+	$div = new Element('div');
+	$div->addClass('progress');
+	if ($isStripe)
+	    $div->addClass("progress-striped");
+	if ($isStripe && $isAnimated)
+	    $div->addClass('active');
+	if (isset($attrs['class']))
+	{
+	    $div->addClass($attrs['class']);
+	    unset($attrs['class']);
+	}
+	foreach ($attrs as $attr => $val)
+	{
+	    $div->setAttr($attr, $val);
+	}
+	$default = array(
+	    'min' => 0,
+	    'max' => 100,
+	    'value' => 0,
+	    'modifier' => '',
+	    'attrs' => array(),
+	);
+	foreach ($bars as $bar)
+	{
+	    $barOpt = Utilities::mergeParams($default, $bar);
+	    $barElement = new Element('div');
+	    $barElement->addClass('progress-bar');
+	    if ($barOpt['modifier'])
+		$barElement->addClass("progress-bar-{$barOpt['modifier']}");
+	    if (isset($barOpt['attrs']['class']))
+	    {
+		$barElement->addClass($bar['attrs']['class']);
+		unset($barOpt['attrs']['class']);
+	    }
+	    foreach ($barOpt['attrs'] as $attr => $val)
+	    {
+		$barElement->setAttr($attr, $val);
+	    }
+	    $barElement->setAttr('aria-valuenow', $barOpt['value'])
+		    ->setAttr('aria-valuemin', $barOpt['min'])
+		    ->setAttr('aria-valuemax', $barOpt['max'])
+		    ->setAttr('style', "width: {$barOpt['value']}%")
+		    ->appendTo($div);
+	}
 
-    public static function listGroupItem($content, $attrs = array(), $modifier = '')
-    {
-	return static::_listGroupItem('li', $content, $attrs, $modifier);
-    }
-
-    public static function linkListGroupItem($content, $attrs = array(), $modifier = '')
-    {
-	return static::_listGroupItem('a', $content, $attrs, $modifier);
+	return $div->html();
     }
 
     private static function _listGroupOpen($itemElement, $attrs)
@@ -328,10 +383,10 @@ class Component
 	{
 	    $element->setAttr($attr, $val);
 	}
-	$formatter =  new \HieuLe\PhpHtmlDom\HTML\Formatter();
+	$formatter = new \HieuLe\PhpHtmlDom\HTML\Formatter();
 	return $formatter->writeElementOpenningTag($element);
     }
-    
+
     private static function _listGroupClose($itemElement)
     {
 	return "</{$itemElement}>";
