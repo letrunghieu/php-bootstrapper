@@ -244,6 +244,23 @@ class Component
 	$span = new Element('span');
 	return $span->addClass('caret')->html();
     }
+    
+    public static function label($content, $modifier, $attrs = array())
+    {
+	$span = new Element('span');
+	$span->addClass("label label-{$modifier}");
+	if (isset($attrs['class']))
+	{
+	    $span->addClass($attrs['class']);
+	    unset($attrs['class']);
+	}
+	foreach($attrs as $attr => $val)
+	{
+	    $span->setAttr($attr, $val);
+	}
+	$span->appendText($content);
+	return $span->html();
+    }
 
     public static function nav($items, $attrs = array())
     {

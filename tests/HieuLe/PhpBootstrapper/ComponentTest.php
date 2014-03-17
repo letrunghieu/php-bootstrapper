@@ -265,6 +265,24 @@ HTML;
 HTML;
 	$this->assertSame($html, Component::buttonDropdownToggle('Dropdown'));
     }
+    
+    public function testLabel()
+    {
+	$html = <<<HTML
+<span class="label label-success">
+  Foo
+</span>
+
+HTML;
+	$this->assertSame($html, Component::label('Foo', Component::MODIFIER_SUCCESS));
+	$html = <<<HTML
+<span class="label label-success class-foo" data-bar="baz">
+  Foo
+</span>
+
+HTML;
+	$this->assertSame($html, Component::label('Foo', Component::MODIFIER_SUCCESS, array('class' => 'class-foo', 'data-bar' => 'baz')));
+    }
 
 }
 
