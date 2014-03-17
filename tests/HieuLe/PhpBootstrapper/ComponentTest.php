@@ -283,6 +283,43 @@ HTML;
 HTML;
 	$this->assertSame($html, Component::label('Foo', Component::MODIFIER_SUCCESS, array('class' => 'class-foo', 'data-bar' => 'baz')));
     }
+    
+    public function testListGroupOpen()
+    {
+	$html = <<<HTML
+<ul class="list-group">
+HTML;
+	$this->assertSame($html, Component::listGroupOpen());
+	$html = <<<HTML
+<div class="list-group foo" data-bar="baz">
+HTML;
+	$this->assertSame($html, Component::linkListGroupOpen(array('class' => 'foo', 'data-bar' => 'baz')));
+    }
+    
+    public function testListGroupClose()
+    {
+	$this->assertSame("</ul>", Component::listGroupClose());
+	$this->assertSame("</div>", Component::linkListGroupClose());
+    }
+    
+    public function testListGroupItem()
+    {
+	$html  = <<<HTML
+<li class="list-group-item">
+  Foo
+</li>
+
+HTML;
+	$this->assertSame($html, Component::listGroupItem('Foo'));
+	
+	$html  = <<<HTML
+<a class="list-group-item list-group-item-warning foo" href="#">
+  Foo
+</a>
+
+HTML;
+	$this->assertSame($html, Component::linkListGroupItem("Foo", array('class' => 'foo', 'href' => '#'), Component::MODIFIER_WARNING));
+    }
 
 }
 

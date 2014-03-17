@@ -244,7 +244,7 @@ class Component
 	$span = new Element('span');
 	return $span->addClass('caret')->html();
     }
-    
+
     public static function label($content, $modifier, $attrs = array())
     {
 	$span = new Element('span');
@@ -254,7 +254,7 @@ class Component
 	    $span->addClass($attrs['class']);
 	    unset($attrs['class']);
 	}
-	foreach($attrs as $attr => $val)
+	foreach ($attrs as $attr => $val)
 	{
 	    $span->setAttr($attr, $val);
 	}
@@ -283,6 +283,77 @@ class Component
 	    $li->appendTo($div);
 	}
 	return $div->html();
+    }
+
+    public static function listGroupOpen($attrs = array())
+    {
+	return static::_listGroupOpen('ul', $attrs);
+    }
+
+    public static function linkListGroupOpen($attrs = array())
+    {
+	return static::_listGroupOpen('div', $attrs);
+    }
+    
+    public static function listGroupClose()
+    {
+	return static::_listGroupClose('ul');
+    }
+    
+    public static function linkListGroupClose()
+    {
+	return static::_listGroupClose('div');
+    }
+
+    public static function listGroupItem($content, $attrs = array(), $modifier = '')
+    {
+	return static::_listGroupItem('li', $content, $attrs, $modifier);
+    }
+
+    public static function linkListGroupItem($content, $attrs = array(), $modifier = '')
+    {
+	return static::_listGroupItem('a', $content, $attrs, $modifier);
+    }
+
+    private static function _listGroupOpen($itemElement, $attrs)
+    {
+	$element = new Element($itemElement);
+	$element->addClass('list-group');
+	if (isset($attrs['class']))
+	{
+	    $element->addClass($attrs['class']);
+	    unset($attrs['class']);
+	}
+	foreach ($attrs as $attr => $val)
+	{
+	    $element->setAttr($attr, $val);
+	}
+	$formatter =  new \HieuLe\PhpHtmlDom\HTML\Formatter();
+	return $formatter->writeElementOpenningTag($element);
+    }
+    
+    private static function _listGroupClose($itemElement)
+    {
+	return "</{$itemElement}>";
+    }
+
+    private static function _listGroupItem($itemElement, $content, $attrs = array(), $modifier = '')
+    {
+	$item = new Element($itemElement);
+	$item->addClass('list-group-item');
+	if ($modifier)
+	    $item->addClass("list-group-item-{$modifier}");
+	if (isset($attrs['class']))
+	{
+	    $item->addClass($attrs['class']);
+	    unset($attrs['class']);
+	}
+	foreach ($attrs as $attr => $val)
+	{
+	    $item->setAttr($attr, $val);
+	}
+	$item->appendText($content);
+	return $item->html();
     }
 
 }
