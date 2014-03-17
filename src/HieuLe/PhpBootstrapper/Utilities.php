@@ -10,12 +10,12 @@ class Utilities
 {
     public static function escAttr($input)
     {
-	return htmlspecialchars(trim($input), ENT_QUOTES | ENT_HTML5, 'UTF-8', false);
+	return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8', false);
     }
     
     public static function escHtml($input)
     {
-	return htmlentities($input, ENT_NOQUOTES | ENT_HTML5, 'UTF-8', false);
+	return htmlentities($input, ENT_NOQUOTES, 'UTF-8', false);
     }
     
     public static function mergeParams(array $default, array $options)

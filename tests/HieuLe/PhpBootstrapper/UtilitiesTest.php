@@ -16,7 +16,7 @@ class UtilitiesTest extends \PHPUnit_Framework_TestCase
     {
 	$this->assertEquals("a&amp;b", \HieuLe\PhpBootstrapper\Utilities::escAttr("a&b"));
 	$this->assertEquals("a&quot;b", \HieuLe\PhpBootstrapper\Utilities::escAttr("a\"b"));
-	$this->assertEquals("a&apos;b", \HieuLe\PhpBootstrapper\Utilities::escAttr("a'b"));
+	$this->assertEquals("a&#039;b", \HieuLe\PhpBootstrapper\Utilities::escAttr("a'b"));
 	$this->assertEquals("acb", \HieuLe\PhpBootstrapper\Utilities::escAttr("acb"));
     }
     
