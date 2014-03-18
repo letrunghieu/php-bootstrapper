@@ -50,10 +50,19 @@ class Component
 	return $div->html();
     }
 
-    public static function badge($content)
+    public static function badge($content, $attrs = array())
     {
 	$span = new Element('span');
 	$span->addClass('badge')->appendText($content);
+	if (isset($attrs['class']))
+	{
+	    $span->addClass($attrs['class']);
+	    unset($attrs['class']);
+	}
+	foreach($attrs as $attr => $val)
+	{
+	    $span->setAttr($attr, $val);
+	}
 	return $span->html();
     }
 
